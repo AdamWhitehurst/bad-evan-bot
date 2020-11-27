@@ -1,0 +1,16 @@
+{
+  "name": "bad_evan_bot",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A Discord Bot that corrects my brother Evan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adam Whitehurst",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0"
+  }
+}
