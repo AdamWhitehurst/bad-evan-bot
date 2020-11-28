@@ -72,7 +72,7 @@ export function thoughfulReply(msg: Discord.Message) {
 export function mockingReply(msg: Discord.Message) {
   let reply = "";
 
-  const mockChar = (c) => {
+  const mockChar = (c: string) => {
     const roll = Math.floor(Math.random() * 3);
     const dblRoll = Math.floor(Math.random() * 10);
     reply += roll === 0 ? c.toLowerCase() : c.toUpperCase();
