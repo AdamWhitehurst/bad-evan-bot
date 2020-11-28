@@ -1,6 +1,6 @@
 import Discord from "discord.js";
 import dotenv from "dotenv";
-import { responseFns, rollRandomEntryFrom } from "./responseFunctions.js";
+import { replyToMessage } from "./responseFunctions.js";
 
 const client = new Discord.Client();
 
@@ -16,13 +16,8 @@ client.on("guildMemberAdd", (m) => {
   console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 });
 
-client.on("message", (msg) => {
-  console.log("--------------------");
-  console.log(msg.guild.member(msg.author));
-  if (msg.author.id === process.env.EVANS_USER_ID) {
-    const respFn = rollRandomEntryFrom(responseFns);
-    respFn(msg);
-  }
-});
+client.on("message", (m) => {
+  replyToMessage(m, client);
+}); //replyToMessage);
 
 client.login(process.env.BOT_SECRET_TOKEN);

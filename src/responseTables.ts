@@ -1,4 +1,6 @@
-export const fakeResponses = [
+import { WeightedTable } from "./weightedTable";
+
+export const fakeResponses : WeightedTable = [
   ["That's actually really insightful!", 1],
   ["You might have a point there.", 1],
   ["Woah, you might actually be right", 1],
@@ -6,14 +8,14 @@ export const fakeResponses = [
   ["😲 Could you be right about that??", 2],
 ];
 
-export const psycheResponses = [
+export const psycheResponses : WeightedTable = [
   ["How could you think you would be right about ANYTHING?? 😂", 1],
   ["jk 😂🤣", 2],
   ["I bet you actually believed me!", 2],
   ["No way that could happen. 😏", 2],
 ];
 
-export const thinkingResponses = [
+export const thinkingResponses : WeightedTable = [
   ["🤔", 5],
   ["I'm thinking about that one...", 2],
   ["Hmmm...", 2],
@@ -22,11 +24,35 @@ export const thinkingResponses = [
   ["I'm gonna have to double-check that one", 1],
 ];
 
-export const simpleResponses = [
+export const emojiResponses : WeightedTable = [
+  ["👏", 10],
+  ["💩", 1],
+  ["🎉", 2],
+  ["✨", 2],
+];
+
+export const simpleResponses: WeightedTable = [
   ["False.", 3],
   ["Incorrect.", 3],
+  ["Correction: alsiduyrfn42987nsav234h we 98723b oiwlivm423", 3],
   ["Alright, don't get ahead of yourself, bud.", 1],
-  ["Sometime you say stuff and I just laugh.", 1],
+  ["Sometimes you say stuff and I just laugh.", 1],
+  ["Sometimes I wonder how you remember to breathe 😟", 1],
+  [
+    "If your head wasn't connected to your neck, would it just float away? 🤷‍♀️",
+    1,
+  ],
+  ["It cost you exactly $0.00 to say that and yet you did.", 1],
+  ["Sometime I just wish you wouldn't", 1],
+  ["Oh! Next time you says that, just remember to not.", 1],
+  [
+    "Occasionally while you're talking, I think the ends are switched and that actually you think about the way you articulate your farts ",
+    1,
+  ],
+  [
+    "One time mom told me she dropped you as a baby after you said something like that.",
+    1,
+  ],
   ["Can you even hear yourself when you talk?", 1],
   [
     "IF YOU GOT SOMETHING TO SAY YOU BETTER SAY IT WITH YOUR CHEST BUT BEFORE YOU DO YOU BETTER LET THAT ONE MARINATE",
