@@ -1,8 +1,8 @@
 // import "./weightedTable";
 
-import { WeightedTable } from "./weightedTable";
+import { WeightedOutput } from "./weightedTable";
 
-export function rollRandomEntryFrom(weightedTable: WeightedTable) {
+export function rollRandomEntryFrom(weightedTable: WeightedOutput) {
   if (!Array.isArray(weightedTable)) {
     throw new Error(
       `weightedTable must be an array of weighted Entries, recieved ${typeof weightedTable}`

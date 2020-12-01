@@ -5,31 +5,44 @@ import {
   psycheResponses,
   simpleResponses,
   thinkingResponses
-} from "./responseTables.js";
-import { WeightedTable } from "./weightedTable.js";
-import { rollRandomEntryFrom } from "./weightedTableFunctions.js";
+} from "./responseTables";
+import { WeightedOutput } from "./weightedTable";
+import { rollRandomEntryFrom } from "./weightedTableFunctions";
 
-export const responseFns: WeightedTable = [
-  [simpleReply, 5],
-  [noReply, 2],
-  [thoughfulReply, 3],
-  [mockingReply, 3],
-  [psycheReply, 1],
-  [react, 10],
+/**
+ * "Most of the time it doesn't react, but when it does,
+ * it is great."
+ * 
+ * TODO: More interesting behavior
+ */
+export const responseBehavior: WeightedOutput = [
+  [1 , psycheReply],
+  [3 , thoughfulReply],
+  [5 , simpleReply],
+  [10, mockingReply],
+  [31, react],
+  [50, noReply],
 ];
 
-const ayyImg = new Discord.MessageAttachment("./assets/ayy.png");
+export function sendFile (msg: Discord.Message, assetFileName: string, content="") {  
+  const file = new Discord.MessageAttachment(`./assets/${assetFileName}`);
+  msg.channel.send({ files: [file], content });
+}
 
-export function replyToMessage(msg: Discord.Message, client: Discord.Client) {
+export function determineResponse(msg: Discord.Message, client: Discord.Client) {
   console.log("--------------------");
   console.log(msg.guild.member(msg.author));
 
   if (msg.content.match(/^ayy/i)) {
-    msg.channel.send({ files: [ayyImg], content: "lmao" });
+    sendFile(msg, 'ayy.png', "lmao");
+  }
+
+  if (msg.content.match(/^noice/i)) {
+    sendFile(msg, 'noice.gif');
   }
 
   if (msg.author.id === process.env.EVANS_USER_ID) {
-    const respFn = rollRandomEntryFrom(responseFns);
+    const respFn = rollRandomEntryFrom(responseBehavior);
 
     setTimeout(() => {
       respFn(msg, client);
@@ -59,7 +72,7 @@ export function psycheReply(msg: Discord.Message) {
 
 export function thoughfulReply(msg: Discord.Message) {
   const initResponse = rollRandomEntryFrom(thinkingResponses);
-  const delayedResponseFn = rollRandomEntryFrom(responseFns);
+  const delayedResponseFn = rollRandomEntryFrom(responseBehavior);
   const responseDelay = Math.random() * 2000;
 
   msg.channel.send(initResponse);

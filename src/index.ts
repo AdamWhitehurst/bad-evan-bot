@@ -1,6 +1,6 @@
 import Discord from "discord.js";
 import dotenv from "dotenv";
-import { replyToMessage } from "./responseFunctions.js";
+import { determineResponse } from "./responseFunctions.js";
 
 const client = new Discord.Client();
 
@@ -17,7 +17,7 @@ client.on("guildMemberAdd", (m) => {
 });
 
 client.on("message", (m) => {
-  replyToMessage(m, client);
-}); //replyToMessage);
+  determineResponse(m, client);
+}); 
 
 client.login(process.env.BOT_SECRET_TOKEN);
