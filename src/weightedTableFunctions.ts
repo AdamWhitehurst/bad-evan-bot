@@ -1,14 +1,7 @@
-// import "./weightedTable";
+import { WeightedTable } from "./weightedTable";
 
-import { WeightedOutput } from "./weightedTable";
 
-export function rollRandomEntryFrom(weightedTable: WeightedOutput) {
-  if (!Array.isArray(weightedTable)) {
-    throw new Error(
-      `weightedTable must be an array of weighted Entries, recieved ${typeof weightedTable}`
-    );
-  }
-
+export function rollRandomEntryFrom<T>(weightedTable: WeightedTable<T>): T {
   const sumOfWeights = weightedTable.reduce(accWeightedTableSum, 0);
 
   if (sumOfWeights === 0) {
@@ -21,34 +14,16 @@ export function rollRandomEntryFrom(weightedTable: WeightedOutput) {
 
   while (idx < weightedTable.length) {
     const entry = weightedTable[idx];
-    sum += entry[1] / sumOfWeights;
+    sum += entry[0] / sumOfWeights;
 
     if (roll <= sum) {
-      return entry[0];
+      return entry[1];
     }
 
     idx++;
   }
-
-  return somethingBrokeResponse;
 }
 
-function accWeightedTableSum(acc, entry, i) {
-  if (!Array.isArray(entry) || entry.length !== 2) {
-    throw new Error(
-      `Weighted table entry #${i} is not an array of exactly two entries:
-      ${JSON.stringify(entry)}
-      `
-    );
-  }
-
-  if (typeof entry[1] !== "number") {
-    throw new Error(
-      `Entry #${i} does not have a 'number' type as the entry[1]`
-    );
-  }
-
-  return acc + entry[1];
+function accWeightedTableSum(acc, entry) {
+  return acc + entry[0];
 }
-/** Something went wrong if you see this */
-const somethingBrokeResponse = "idk how to respond to that...";

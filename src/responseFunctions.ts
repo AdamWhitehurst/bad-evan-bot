@@ -6,7 +6,8 @@ import {
   simpleResponses,
   thinkingResponses
 } from "./responseTables";
-import { WeightedOutput } from "./weightedTable";
+import { smartResponse } from './smartResponse';
+import { WeightedTable } from "./weightedTable";
 import { rollRandomEntryFrom } from "./weightedTableFunctions";
 
 /**
@@ -15,13 +16,14 @@ import { rollRandomEntryFrom } from "./weightedTableFunctions";
  * 
  * TODO: More interesting behavior
  */
-export const responseBehavior: WeightedOutput = [
+export const responseBehavior: WeightedTable<Function> = [
   [1 , psycheReply],
   [3 , thoughfulReply],
   [5 , simpleReply],
   [10, mockingReply],
-  [31, react],
+  [41, react],
   [50, noReply],
+  [25, smartResponse],
 ];
 
 export function sendFile (msg: Discord.Message, assetFileName: string, content="") {  
@@ -31,22 +33,38 @@ export function sendFile (msg: Discord.Message, assetFileName: string, content="
 
 export function determineResponse(msg: Discord.Message, client: Discord.Client) {
   console.log("--------------------");
-  console.log(msg.guild.member(msg.author));
+
+  let firstMention = msg.mentions.members.first();
+  if (firstMention?.user === client.user) {
+    smartResponse(msg, client);
+    return;
+  }
 
   if (msg.content.match(/^ayy/i)) {
     sendFile(msg, 'ayy.png', "lmao");
+    return;
   }
 
   if (msg.content.match(/^noice/i)) {
     sendFile(msg, 'noice.gif');
+    return;
   }
 
-  if (msg.author.id === process.env.EVANS_USER_ID) {
+  const rng = Math.floor(Math.random() * 2);
+  if (msg.author.id === process.env.EVANS_USER_ID || rng === 0 ) {
     const respFn = rollRandomEntryFrom(responseBehavior);
 
     setTimeout(() => {
-      respFn(msg, client);
+      try {
+         console.log(`Calling ${respFn.name}`);
+         respFn(msg, client);
+      } catch (e) {
+        console.log("Response Error:\n", e);
+      }
     }, 500);
+  }
+  else {
+    console.log("...");
   }
 }
 

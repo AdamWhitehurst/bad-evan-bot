@@ -1,10 +1,13 @@
+#!/usr/bin/env node
 import Discord from "discord.js";
 import dotenv from "dotenv";
+import path from 'path';
+import "source-map-support/register";
 import { determineResponse } from "./responseFunctions.js";
 
 const client = new Discord.Client();
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 client.on("ready", () => {
   console.log("Hello world!");

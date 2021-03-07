@@ -1,7 +1,7 @@
-export interface WeightedOutputEntry {
+export interface WeightedTableEntry<T>{
     0: number
-    1: any,
+    1: T,
 }
-export interface WeightedOutput {
-    [index:number]: WeightedOutputEntry
+export interface WeightedTable<T>  extends Array<WeightedTableEntry<T>> {
+    [index:number]: WeightedTableEntry<T>
 }

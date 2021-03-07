@@ -1,6 +1,6 @@
-import { WeightedOutput } from "./weightedTable";
+import { WeightedTable } from "./weightedTable";
 
-export const fakeResponses : WeightedOutput = [
+export const fakeResponses : WeightedTable<string> = [
   [1, "That's actually really insightful!"],
   [1, "You might have a point there."],
   [1, "Woah, you might actually be right"],
@@ -8,14 +8,14 @@ export const fakeResponses : WeightedOutput = [
   [2, "😲 Could you be right about that??"],
 ];
 
-export const psycheResponses : WeightedOutput = [
+export const psycheResponses : WeightedTable<string> = [
   [1, "How could you think you would be right about ANYTHING?? 😂"],
   [2, "jk 😂🤣"],
   [2, "I bet you actually believed me!"],
   [2, "No way that could happen. 😏"],
 ];
 
-export const thinkingResponses : WeightedOutput = [
+export const thinkingResponses : WeightedTable<string> = [
   [5, "🤔"],
   [2, "I'm thinking about that one..."],
   [2, "Hmmm..."],
@@ -24,14 +24,14 @@ export const thinkingResponses : WeightedOutput = [
   [1, "I'm gonna have to double-check that one"],
 ];
 
-export const emojiResponses : WeightedOutput = [
-  [10,"👏"],
+export const emojiResponses : WeightedTable<string> = [
+  [10, "👏"],
   [1, "💩"],
   [2, "🎉"],
   [2, "✨"],
 ];
 
-export const simpleResponses: WeightedOutput = [
+export const simpleResponses: WeightedTable<string> = [
   [3, "False."],
   [3, "Incorrect."],
   [3, "Correction: alsiduyrfn42987nsav234h we 98723b oiwlivm423"],
